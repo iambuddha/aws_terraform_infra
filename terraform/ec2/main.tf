@@ -7,7 +7,7 @@ data "aws_availability_zones" "available" {}
 
 resource "aws_key_pair" "mytest-key" {
   key_name = "my-terraform-key-new1"
-  public_key = file("/tmp/id_rsa.pub")
+  public_key = file("c:/Temp/id_rsa.pub")
 }
 
 resource "aws_instance" "my_instance" {

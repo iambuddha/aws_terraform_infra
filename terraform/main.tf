@@ -33,5 +33,5 @@ module "auto_scaling" {
   instance_type = "t2.micro"
   subnet1 = module.vpc.subnet1
   subnet2 = module.vpc.subnet2
-  target_group_arn = module.alb.alb_target_group_arn
+  alb_target_group_arn = module.alb.alb_target_group_arn
 }

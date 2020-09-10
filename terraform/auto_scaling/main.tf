@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_launch_configuration" "my-test-launch-config" {
   image_id = "ami-0c94855ba95c71c99"
   instance_type = var.instance_type
-  security_groups = aws_security_group.my-asg-sg.id
+  security_groups = [aws_security_group.my-asg-sg.id]
 
   user_data = <<-EOF
               #!/bin/bash
@@ -23,7 +23,7 @@ resource "aws_launch_configuration" "my-test-launch-config" {
 resource "aws_autoscaling_group" "example" {
   launch_configuration = aws_launch_configuration.my-test-launch-config.name
   vpc_zone_identifier = [var.subnet1, var.subnet2]
-  target_group_arns = [var.target_group_arn]
+  target_group_arns = [var.alb_target_group_arn]
   health_check_type = "ELB"
   max_size = 10
   min_size = 2
@@ -34,6 +34,11 @@ resource "aws_autoscaling_group" "example" {
     value = "my-test-asg"
   }
 }
+
+#resource "aws_autoscaling_attachment" "asg_attachment_elb" {
+#  autoscaling_group_name = aws_autoscaling_group.example.id
+#  alb_target_group_arn = var.alb_target_group_arn
+#}
 
 resource "aws_security_group" "my-asg-sg" {
   name = "my-asg-sg"
