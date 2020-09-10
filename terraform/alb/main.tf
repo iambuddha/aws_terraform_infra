@@ -38,7 +38,7 @@ resource "aws_lb" "my-aws-alb" {
   security_groups = [aws_security_group.my-alb-sg.id]
 
   subnets = [
-  var.subnet1
+  var.subnet1,
   var.subnet2
   ]
 
