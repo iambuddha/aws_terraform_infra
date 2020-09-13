@@ -1,4 +1,4 @@
-#need to check new version issues
+#https://github.com/100daysofdevops/21_days_of_aws_using_terraform/
 provider "aws" {
   region = "us-east-1"
 }
@@ -42,4 +42,9 @@ module "rds" {
   rds_subnet1 = module.vpc.privae_subnet1
   rds_subnet2 = module.vpc.privae_subnet2
   vpc_id = module.vpc.vpc_id
+}
+
+module "iam" {
+  source = "./iam"
+  username = ["user1", "user2", "user3"]
 }
